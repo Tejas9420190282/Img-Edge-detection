@@ -25,9 +25,6 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(AutoIncrement, { inc_field: "userId" });
 
 // Method to compare passwords
-userSchema.methods.comparePassword = async function (candidatePassword) {
-    return await bcrypt.compare(candidatePassword, this.password);
-};
 
 module.exports = mongoose.model("User", userSchema);
 

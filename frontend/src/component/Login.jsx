@@ -1,31 +1,36 @@
 
+
 // Login.jsx
 
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Make sure you're using react-router
+import { Link, useNavigate } from "react-router-dom"; // Make sure you're using react-router
+
 
 const Login = () => {
   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userName, setUserName] = useState("");
-  const [message, setMessage] = useState("");
+    const [message, setMessage] = useState("");
+
+    const nevigate = useNavigate();
 
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
 
-    const responce = axios.post("http://localhost:1212/login", {
+    const responce = await axios.post("http://localhost:1212/login", {
         email, 
         password
     })
 
     setMessage(responce.data.message);
     setMessage(responce.data.userName);
+    nevigate(responce.data.redirect);
   };
 
   return (

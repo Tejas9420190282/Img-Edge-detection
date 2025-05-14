@@ -19,11 +19,7 @@ const login_Controller = async (req, res) => {
 
         console.log(`Input Password : ${password}`);
         
-        // Get user and include password field
         const user = await User.findOne({ email }).select('+password');
-
-        console.log(user.password);
-        
 
         if (!user) {
             console.log("User not found, please create an account.".bgRed);
@@ -33,10 +29,11 @@ const login_Controller = async (req, res) => {
             });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        console.log(isMatch);
-    
+        console.log("Stored Password (Hashed):", user.password);
 
+        const isMatch = await bcrypt.compare(password, user.password);
+        console.log("Password Match:", isMatch);
+    
         if (!isMatch) {
             console.log("Invalid Password....".bgRed);
             return res.status(401).json({
@@ -64,7 +61,7 @@ const login_Controller = async (req, res) => {
             message: "Successfully logged in!",
             token,
             userName: user.name,
-            redirect : "/user"
+            redirect : "/user/home"
         });
 
     } catch (error) {
@@ -76,7 +73,12 @@ const login_Controller = async (req, res) => {
     }
 };
 
+
 exports.login_Controller = login_Controller;
+
+
+
+
 
 
 

@@ -1,10 +1,11 @@
 
 // db.js -
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const connectDB = async () => {
     try {
-        const url = "mongodb+srv://root:root@mongodb.mgc99hl.mongodb.net/?retryWrites=true&w=majority&appName=MongoDB";  
+        const url = process.env.databaseURL;  
         
         await mongoose.connect(url);
         console.log("MongoDB Connected Successfully!".bgGreen);   

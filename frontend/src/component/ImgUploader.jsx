@@ -1,3 +1,6 @@
+
+// ImgUploader.jsx (React)
+
 // ImgUploader.jsx (React)
 
 import axios from "axios";
@@ -189,3 +192,4 @@ function ImgUploader() {
 }
 
 export default ImgUploader;
+
